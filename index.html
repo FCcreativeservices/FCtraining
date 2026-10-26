@@ -13,14 +13,22 @@
 *{box-sizing:border-box}
 html,body{margin:0}
 body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);font-size:15px;line-height:1.45;min-height:100vh;
-  background:radial-gradient(1200px 600px at 85% -10%,rgba(255,95,200,.16),transparent 60%),
-             radial-gradient(900px 600px at -10% 30%,rgba(23,102,155,.35),transparent 60%),
-             radial-gradient(800px 500px at 60% 110%,rgba(224,115,0,.14),transparent 60%),var(--bg);background-attachment:fixed}
+  background:linear-gradient(180deg,#E6ECF6 0%,#F3F6FB 40%,#F7F9FC 100%);background-color:#F7F9FC}
+.nebula{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.nebula i{position:absolute;border-radius:50%;filter:blur(90px);mix-blend-mode:screen;will-change:transform}
+.nebula .n1{width:55vw;height:55vw;max-width:720px;max-height:720px;right:-12vw;top:-18vw;background:#FF5FC8;opacity:.22;animation:drift1 26s ease-in-out infinite alternate}
+.nebula .n2{width:50vw;height:50vw;max-width:680px;max-height:680px;left:-16vw;top:25vh;background:#17669B;opacity:.4;animation:drift2 32s ease-in-out infinite alternate}
+.nebula .n3{width:40vw;height:40vw;max-width:560px;max-height:560px;right:5vw;bottom:-14vw;background:#E07300;opacity:.18;animation:drift3 24s ease-in-out infinite alternate}
+.nebula .n4{width:36vw;height:36vw;max-width:500px;max-height:500px;left:30vw;top:10vh;background:#8B5CF6;opacity:.2;animation:drift4 36s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-18vw,14vh) scale(1.25)}}
+@keyframes drift2{0%{transform:translate(0,0) scale(1)}100%{transform:translate(22vw,-10vh) scale(.85)}}
+@keyframes drift3{0%{transform:translate(0,0) scale(.9)}100%{transform:translate(-25vw,-16vh) scale(1.2)}}
+@keyframes drift4{0%{transform:translate(0,0) scale(1)}100%{transform:translate(12vw,22vh) scale(1.3)}}
 button{font:inherit;cursor:pointer;color:inherit}
 #stars{position:fixed;inset:0;z-index:0;pointer-events:none}
 .top,.wrap{position:relative;z-index:1}
 /* header */
-.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:12px 28px;background:rgba(6,10,28,.72);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:12px 28px;background:rgba(6,10,28,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .logo{display:flex;align-items:center;gap:12px;cursor:pointer;white-space:nowrap}
 .logo .mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--orange),#FF8A3D);display:grid;place-items:center;box-shadow:0 0 18px rgba(224,115,0,.55)}
 .logo .name b{display:block;font-size:19px;letter-spacing:.22em;font-weight:900}
@@ -282,6 +290,147 @@ button{font:inherit;cursor:pointer;color:inherit}
 .light .c-o{color:#B85A00}.light .c-c{color:#0E6A8C}.light .c-r{color:#B4233B}
 .light .alertcard{border-color:#F6C9D1!important}
 .light .planet .pb{opacity:.6}
+
+/* light content surfaces */
+.card.light,.pcard.light,.phase.light,.trail-wrap.light{background:#fff;border-color:transparent;box-shadow:0 8px 26px rgba(0,0,0,.28)}
+.pcard.light:hover{box-shadow:0 0 0 2px color-mix(in srgb,var(--c) 70%,transparent),0 12px 30px rgba(0,0,0,.35)}
+.light .bar{background:#E9ECF3}
+.light .continue .t span,.light .pcard .sub,.light .mini .row{color:var(--muted)}
+.pcard.light .status{color:#3A4560}
+.pcard.home.light .status{color:#B85A00}
+.light .phase-h{border-color:var(--line)}
+.light .phase-h .n{background:#E3F4FB;color:#0E6A8C}
+.light .phase-h.complete .n{background:var(--green);color:#06301A}
+.light .task{border-color:#EEF0F5}
+.light .task:hover{background:#F7F8FB}
+.light .task.next{background:linear-gradient(90deg,#FFF1E3,#fff 70%)}
+.light .check{border-color:#C9CED9;background:#fff}
+.light .task.done .check{background:var(--green);border-color:var(--green)}
+.light .nextlbl{color:#B85A00}
+.light .right-meta em{color:#0E6A8C}
+.light .kv{border-color:var(--line)}
+.trail-wrap.light .trail-bg{stroke:#E6E9F2}
+.trail-wrap.light .node text,.trail-wrap.light .band{stroke:#fff}
+.trail-wrap.light .trail-dash{stroke:rgba(255,255,255,.85)}
+
+/* checklist read-more */
+.titem{border-bottom:1px solid #EEF0F5}.titem:last-child{border-bottom:0}
+.titem .task{border-bottom:0!important}
+.more{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:12px;font-weight:700;color:#0E6A8C}
+.more .lbl:after{content:"Read more"}
+.titem.open .more .lbl:after{content:"Show less"}
+.more svg{transition:transform .25s}
+.titem.open .more svg{transform:rotate(180deg)}
+.task-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.8,.2,1)}
+.task-more > div{overflow:hidden}
+.titem.open .task-more{grid-template-rows:1fr}
+.tm{padding:2px 18px 18px 64px}
+.tm h5{margin:16px 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+.tm .lead{margin:0}
+.tm-act{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn.sm{padding:7px 14px;font-size:13px;border-radius:10px}
+.titem.flash,.mrow.flash .mcard{animation:flash 1.5s}
+@keyframes flash{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 4px rgba(224,115,0,.45)}}
+/* mission bases */
+.mpath{padding:28px 24px 30px}
+.mrow{width:56%;position:relative}
+.mrow.c0{margin-left:0}.mrow.c1{margin-left:22%}.mrow.c2{margin-left:44%}
+.mpath .conn,.mpath .conn-m{display:block;width:100%;height:46px!important;overflow:visible}
+.mpath .conn-m{display:none;height:30px!important}
+.conn path,.conn-m path{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.cbg{stroke:#E6E9F2;stroke-width:10}
+.cdn{stroke-width:10}
+.cdash{stroke:#fff;stroke-width:2;stroke-dasharray:1 10;opacity:.9}
+.mband{font-size:11px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin:4px 0 8px 6px}
+.mcard{display:flex;gap:14px;padding:14px 16px;border-radius:18px;background:#fff;border:1.5px solid #E3E6EE;box-shadow:0 6px 18px rgba(19,36,80,.08);transition:transform .2s,box-shadow .2s}
+.mcard:hover{transform:translateY(-2px)}
+.mcard.current{border-color:#E07300;box-shadow:0 0 0 4px rgba(224,115,0,.14),0 12px 26px rgba(224,115,0,.2)}
+.mcard.done{border-color:#BFE8CF}
+.mcard.locked{background:#F6F7FA;box-shadow:none}
+.mcard.locked h4{color:#8A93B0}
+.mcard.final{border-width:2px;border-color:var(--c);background:linear-gradient(135deg,#fff 40%,color-mix(in srgb,var(--c) 14%,#fff))}
+.mcard.final.locked{border-color:#D5DAE5}
+.mico{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;flex:none;background:#E3E7F0}
+.mcard.done .mico{background:#2BB673}
+.mcard.current .mico{background:linear-gradient(135deg,#E07300,#FF8A3D);animation:beacon 1.8s infinite}
+@keyframes beacon{0%{box-shadow:0 0 0 0 rgba(224,115,0,.55)}100%{box-shadow:0 0 0 14px rgba(224,115,0,0)}}
+.mbody{flex:1;min-width:0}
+.mk{font-size:10px;letter-spacing:.14em;font-weight:900;color:#8A93B0;text-transform:uppercase}
+.mcard h4{margin:3px 0 8px;font-size:16px;line-height:1.25}
+.mmeta{display:flex;flex-wrap:wrap;gap:6px;font-size:11.5px;color:#5E6A85}
+.mmeta span{background:#F1F3F8;border-radius:20px;padding:2px 9px}
+.mmeta .ok{background:#E5F7EC;color:#1D7A45;font-weight:700}
+.mact{margin-top:12px}
+.mact .btn{display:inline-flex;align-items:center;gap:6px}
+.mstone{display:flex;gap:8px;align-items:center;margin:10px 0 0 6px;font-size:12px;color:#8A7A66;opacity:.6}
+.mstone.got{opacity:1;color:#6B4F2E;font-weight:700}
+/* SCORM player modal */
+.player{text-align:left}
+.player .ph{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange2);font-weight:900;margin-bottom:12px}
+.player .x{background:rgba(255,255,255,.12);border:0;width:30px;height:30px;border-radius:50%;font-size:17px}
+.player .screen{aspect-ratio:16/9;border-radius:14px;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 30% 30%,color-mix(in srgb,var(--c) 55%,#0B1030),#060A1C);border:1px solid var(--line)}
+.player .screen b{display:block;font-size:18px;margin-top:8px}
+.player .screen small{color:var(--muted)}
+.player .units{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.player .units span{font-size:12px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.08);color:var(--muted)}
+.player .units span.on{background:var(--orange);color:#fff}
+.player .demo{margin-top:12px;background:none;border:1px dashed rgba(255,255,255,.3);border-radius:10px;padding:7px 12px;font-size:12px;color:var(--muted);width:100%}
+.player .demo:hover{color:var(--ink);border-color:var(--orange2)}
+@media (max-width:760px){.mrow{width:100%;margin-left:0!important}.mpath .conn{display:none}.mpath .conn-m{display:block}.tm{padding-left:18px}}
+
+/* ===== light page, dark space sections ===== */
+.nebula{display:none}
+.light{--panel:#fff;--panel2:#F1F3F8}
+.top,.space,.space-ph,.mbox,.toast{--ink:#EEF2FF;--muted:#9AA6C8;--line:rgba(255,255,255,.12);--panel:rgba(255,255,255,.055);--panel2:rgba(255,255,255,.09);color:var(--ink)}
+.top{background:#060A1C}
+.crumb{color:#5E6A85}.crumb a{color:#0E6A8C}
+.card.light,.pcard.light,.phase.light,.trail-wrap.light,.side.light .card{border:1px solid #E3E6EE!important;box-shadow:0 4px 16px rgba(19,36,80,.07)!important}
+.pcard.light:hover{box-shadow:0 0 0 2px color-mix(in srgb,var(--c) 60%,transparent),0 12px 28px rgba(19,36,80,.14)!important}
+.legend b{color:#1B2430!important}
+.tabs{box-shadow:0 2px 10px rgba(19,36,80,.06)}
+.space{position:relative;overflow:hidden;isolation:isolate;
+  background:linear-gradient(120deg,#060A1C 0%,#0F2A55 30%,#134564 50%,#3B1F6B 75%,#0A1233 100%)!important;background-size:300% 300%!important;animation:spaceShift 22s ease-in-out infinite alternate;border:0;box-shadow:0 14px 34px rgba(6,10,28,.25)}
+.space-ph{isolation:isolate;background:linear-gradient(120deg,color-mix(in srgb,var(--c) 40%,#060A1C) 0%,#0A1233 45%,color-mix(in srgb,var(--c) 25%,#0A1233) 70%,#060A1C 100%)!important;background-size:300% 300%!important;animation:spaceShift 22s ease-in-out infinite alternate;border:0;box-shadow:0 14px 34px rgba(6,10,28,.25)}
+@keyframes spaceShift{0%{background-position:0% 30%}100%{background-position:100% 70%}}
+.space:after,.space-ph:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:radial-gradient(1.6px 1.6px at 8% 22%,#fff,transparent),radial-gradient(1.2px 1.2px at 18% 70%,#fff,transparent),radial-gradient(2px 2px at 31% 38%,#fff,transparent),radial-gradient(1.2px 1.2px at 44% 82%,#fff,transparent),radial-gradient(1.6px 1.6px at 57% 15%,#fff,transparent),radial-gradient(1px 1px at 63% 55%,#fff,transparent),radial-gradient(2px 2px at 76% 30%,#fff,transparent),radial-gradient(1.2px 1.2px at 88% 76%,#fff,transparent),radial-gradient(1.6px 1.6px at 94% 12%,#fff,transparent),radial-gradient(1px 1px at 50% 48%,#fff,transparent);
+  animation:twinkleA 3.2s ease-in-out infinite alternate}
+.space:before,.space-ph:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:radial-gradient(1.2px 1.2px at 12% 48%,#fff,transparent),radial-gradient(1.8px 1.8px at 26% 12%,#fff,transparent),radial-gradient(1px 1px at 38% 62%,#fff,transparent),radial-gradient(1.4px 1.4px at 52% 90%,#fff,transparent),radial-gradient(1.8px 1.8px at 69% 72%,#fff,transparent),radial-gradient(1px 1px at 72% 8%,#fff,transparent),radial-gradient(1.4px 1.4px at 83% 50%,#fff,transparent),radial-gradient(1px 1px at 97% 40%,#fff,transparent),radial-gradient(1.2px 1.2px at 4% 88%,#fff,transparent);
+  animation:twinkleB 2.4s ease-in-out infinite alternate}
+@keyframes twinkleA{0%{opacity:.25}100%{opacity:1}}
+@keyframes twinkleB{0%{opacity:1}100%{opacity:.2}}
+.launchbar.space .track{background-color:rgba(255,255,255,.05)}
+.toast{color:#EEF2FF}
+.light .tab .cnt{background:#EEF1F7}.light .tab.on .cnt{background:rgba(255,255,255,.25)}
+
+/* merged hero + rocket bar */
+.hero .launchbar{grid-column:1/-1;margin:6px 0 0;background:rgba(6,10,28,.35);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(4px);position:relative;z-index:1}
+.hero .moon{display:none}
+.space{animation:spaceShift 12s ease-in-out infinite alternate}
+.space-ph{animation:spaceShift 12s ease-in-out infinite alternate}
+@keyframes hueDrift{0%{filter:blur(60px) hue-rotate(0deg)}50%{filter:blur(60px) hue-rotate(-40deg)}100%{filter:blur(60px) hue-rotate(35deg)}}
+.glow{position:absolute;border-radius:50%;pointer-events:none;z-index:-1;filter:blur(60px);will-change:transform}
+.glow.g1{width:460px;height:380px;right:-60px;bottom:-60px;background:radial-gradient(closest-side,rgba(255,95,200,.7),rgba(255,95,200,0));animation:glow1 14s ease-in-out infinite alternate,hueDrift 17s ease-in-out infinite alternate}
+.glow.g2{width:420px;height:320px;left:-80px;top:-80px;background:radial-gradient(closest-side,rgba(76,201,240,.5),rgba(76,201,240,0));animation:glow2 18s ease-in-out infinite alternate,hueDrift 23s ease-in-out infinite alternate}
+.glow.g3{width:380px;height:300px;left:35%;top:30%;background:radial-gradient(closest-side,rgba(139,92,246,.55),rgba(139,92,246,0));animation:glow3 22s ease-in-out infinite alternate,hueDrift 19s ease-in-out infinite alternate}
+@keyframes glow1{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-160px,-60px) scale(1.3)}}
+@keyframes glow2{0%{transform:translate(0,0) scale(1)}100%{transform:translate(220px,80px) scale(.85)}}
+@keyframes glow3{0%{transform:translate(0,0) scale(.9)}100%{transform:translate(-180px,60px) scale(1.25)}}
+.shoot{position:absolute;top:0;left:0;width:140px;height:2px;border-radius:2px;pointer-events:none;z-index:0;opacity:0;
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.95));transform-origin:right center}
+.shoot:after{content:"";position:absolute;right:-2px;top:-2px;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px rgba(255,255,255,.8)}
+.shoot.s1{animation:shoot1 9s linear infinite 2s}
+.shoot.s2{animation:shoot2 13s linear infinite 6.5s}
+@keyframes shoot1{0%{opacity:0;transform:translate(10vw,20px) rotate(20deg)}2%{opacity:1}9%{opacity:1;transform:translate(48vw,160px) rotate(20deg)}11%,100%{opacity:0;transform:translate(52vw,175px) rotate(20deg)}}
+@keyframes shoot2{0%{opacity:0;transform:translate(60vw,10px) rotate(28deg)}2%{opacity:1}8%{opacity:1;transform:translate(88vw,170px) rotate(28deg)}10%,100%{opacity:0;transform:translate(92vw,190px) rotate(28deg)}}
+
+/* full-bleed hero */
+html,body{overflow-x:clip}
+.top{border-bottom:0!important}
+.hero.space{margin:-26px calc(50% - 50vw) 0;border-radius:0;box-shadow:none;
+  padding:48px calc(50vw - 50%) 40px;min-height:440px}
+@media (max-width:560px){.hero.space{margin-top:-16px;padding:30px calc(50vw - 50%) 28px}}
 .hidden{display:none!important}
 @media (max-width:920px){
   .hero{grid-template-columns:1fr;padding:30px 26px}
@@ -306,6 +455,7 @@ button{font:inherit;cursor:pointer;color:inherit}
 </style>
 </head>
 <body>
+<div class="nebula" aria-hidden="true"><i class="n1"></i><i class="n2"></i><i class="n3"></i><i class="n4"></i></div>
 <canvas id="stars"></canvas>
 
 <header class="top">
@@ -318,7 +468,7 @@ button{font:inherit;cursor:pointer;color:inherit}
   <button class="user" title="Paula Mesa – Profile" aria-label="Profile"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EEF2FF" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></button>
 </header>
 
-<main class="wrap" id="app"></main>
+<main class="wrap light" id="app"></main>
 
 <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
 <aside class="drawer light" id="drawer" aria-live="polite"></aside>
@@ -487,7 +637,7 @@ const OWN={customer:'Your crew',fc:'FC Mission Control',shared:'Joint mission'};
 const XP={task:50,training:10,mission:100,stone:150,conquer:300};
 
 /* ================= STATE (in memory, seeded demo) ================= */
-const S={xp:0,done:new Set(),seen:new Set(),help:new Set(),m:{},view:'home',pid:null,tab:'setup'};
+const S={xp:0,done:new Set(),seen:new Set(),help:new Set(),open:new Set(),m:{},view:'home',pid:null,tab:'setup'};
 PRODUCTS.forEach(p=>S.m[p.id]=0);
 ['f1','f2','f3'].forEach(id=>S.done.add(id));
 S.m.found=5; S.help.add('f4');
@@ -531,8 +681,8 @@ function home(){
   const maxXP=RANKS[RANKS.length-1].xp, pct=Math.min(100,S.xp/maxXP*100);
   const nxt=RANKS[ri+1];
   return `
-  <section class="hero">
-    <div class="moon"></div>
+  <section class="hero space">
+    <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div><i class="shoot s1"></i><i class="shoot s2"></i>
     <div style="position:relative;z-index:1">
       <div class="kicker">Mission briefing</div>
       <h1>Welcome aboard,<br>Commander Paula</h1>
@@ -547,18 +697,19 @@ function home(){
       <div class="frannie"><div class="frannie-inner"><img src="${FRANNIE_SRC}" alt="Frannie, the FranConnect astronaut fox"><i class="lid l"></i><i class="lid r"></i></div></div>
       <div class="rank-tag" id="rankTag"><span class="lv">${ri+1}</span><b>${r.n}</b><span>· ${S.xp.toLocaleString()} XP</span></div>
     </div>
-  </section>
 
-  <section class="launchbar">
+
+    <div class="launchbar">
     <div class="cap"><span>Altitude <b>${S.xp.toLocaleString()} XP</b></span><span>${nxt?`Next orbit in <b>${(nxt.xp-S.xp).toLocaleString()} XP</b>`:'<b>Max orbit reached</b>'}</span></div>
     <div class="track" id="track">
       ${RANKS.slice(1).map(k=>`<i class="tick ${S.xp>=k.xp?'hit':''}" style="left:${k.xp/maxXP*100}%"></i>`).join('')}
       <div class="flame" id="flame" data-w="${pct}"></div>
       <div class="rocket" id="rocket" data-l="${pct}"><svg width="64" height="32" viewBox="0 0 64 32"><path d="M14 10 L5 1 L24 9Z" fill="#E07300"/><path d="M14 22 L5 31 L24 23Z" fill="#E07300"/><path d="M8 16 C16 5 42 4 60 16 C42 28 16 27 8 16Z" fill="#F4F6FB"/><path d="M47 8.5 C53 10.5 57.5 13 60 16 C57.5 19 53 21.5 47 23.5 Z" fill="#E07300"/><circle cx="35" cy="16" r="5.2" fill="#17669B" stroke="#fff" stroke-width="2"/><circle cx="33.5" cy="14.5" r="1.5" fill="#BFE6FF"/><path d="M8 16 L3 13 L3 19Z" fill="#9AA6C8"/></svg></div>
     </div>
+    </div>
   </section>
 
-  <section class="card" style="margin-top:16px">
+  <section class="card light" style="margin-top:16px">
     <h3>${svg('radio','#FFB061',16)} Continue where you left off</h3>
     <div class="continue">
       ${planet(cont,64,missionPct(cont))}
@@ -574,7 +725,7 @@ function home(){
 function pcard(p,i){
   const sp=setupPct(p),mp=missionPct(p),st=stoneState(p);
   const status=i===0&&sp<100?'Start here':st==='gem'?'Conquered':sp===100?'In orbit':sp>0||mp>0?'In flight':'Unexplored';
-  return `<div class="pcard ${i===0?'home':''}" style="--c:${p.c};animation-delay:${i*55}ms" onclick="go('path','${p.id}')">
+  return `<div class="pcard light ${i===0?'home':''}" style="--c:${p.c};animation-delay:${i*55}ms" onclick="go('path','${p.id}')">
     <div class="stone">${stoneIcon(p,34)}</div>
     <div class="head">${planet(p,68,mp)}<div><div class="num">PLANET ${pad(i+1)} · <span class="status">${status}</span></div><h4>${p.name}</h4></div></div>
     <div class="sub">${p.sub}</div>
@@ -589,7 +740,7 @@ function path(){
   const p=P(S.pid),i=PRODUCTS.indexOf(p),a=allTasks(p);
   return `
   <div class="crumb"><a onclick="go('home')">← Galaxy map</a> / Planet ${pad(i+1)}</div>
-  <section class="phead" style="--c:${p.c}">
+  <section class="phead space-ph" style="--c:${p.c}"><i class="shoot s1"></i><i class="shoot s2"></i>
     ${planet(p,120,missionPct(p))}
     <div><div class="num">PLANET ${pad(i+1)}</div><h1>${p.name}</h1><p>${p.sub}</p></div>
     <div class="right">
@@ -612,7 +763,7 @@ function setupView(p){
   return `<div class="legend"><b style="color:var(--ink)">Who flies it:</b> ${ownChip('customer')} ${ownChip('fc')} ${ownChip('shared')} <span class="own help"><span class="d"></span>Mission Control assisting</span></div>
   <div class="layout"><div>
   ${p.phases.map((ph,i)=>{const d=ph.tasks.filter(t=>S.done.has(t.id)).length,c=d===ph.tasks.length;
-    return `<div class="phase"><div class="phase-h ${c?'complete':''}"><div class="n">${c?svg('check','#06301A',14,3):i+1}</div><b>${ph.name}</b><span>${d}/${ph.tasks.length} complete</span></div>${ph.tasks.map(t=>taskRow(t,nt)).join('')}</div>`}).join('')}
+    return `<div class="phase light"><div class="phase-h ${c?'complete':''}"><div class="n">${c?svg('check','#06301A',14,3):i+1}</div><b>${ph.name}</b><span>${d}/${ph.tasks.length} complete</span></div>${ph.tasks.map(t=>taskRow(t,nt)).join('')}</div>`}).join('')}
   </div>
   <div class="side light">
     <div class="card"><h3>Flight status</h3>
@@ -621,96 +772,97 @@ function setupView(p){
       <div class="kv"><span>Assistance requested</span><b class="c-r">${helps.length}</b></div>
       <div class="kv"><span>Next maneuver ETA</span><b>${nt?nt.est:'—'}</b></div>
     </div>
-    ${helps.length?`<div class="card alertcard"><h3 class="c-r">${svg('radio','currentColor',16)} Mission Control assisting</h3>${helps.map(t=>`<div class="kv" style="cursor:pointer;display:block" onclick="openTask('${t.id}')"><b style="font-size:13px">${t.title}</b><div style="font-size:12px;color:var(--muted)">${t.fc||'FC Support'}</div></div>`).join('')}</div>`:''}
+    ${helps.length?`<div class="card alertcard"><h3 class="c-r">${svg('radio','currentColor',16)} Mission Control assisting</h3>${helps.map(t=>`<div class="kv" style="cursor:pointer;display:block" onclick="openTask('${t.id}',true)"><b style="font-size:13px">${t.title}</b><div style="font-size:12px;color:var(--muted)">${t.fc||'FC Support'}</div></div>`).join('')}</div>`:''}
     <div class="card"><h3>Fuel rewards</h3><div style="font-size:13px;color:var(--muted)">+${XP.task} XP per launch task<br>+${XP.training} XP per flight training<br>+${XP.mission} XP per mission<br>+${XP.stone} XP Special Stone found<br>+${XP.conquer} XP Conquer the Territory</div></div>
   </div></div>`;
 }
 function taskRow(t,nt){
-  const d=S.done.has(t.id),isN=nt&&nt.id===t.id,h=S.help.has(t.id)&&!d;
-  return `<div class="task ${d?'done':''} ${isN?'next':''}" onclick="openTask('${t.id}')">
+  const d=S.done.has(t.id),isN=nt&&nt.id===t.id,h=S.help.has(t.id)&&!d,o=S.open.has(t.id);
+  const custBox=t.owner!=='fc',fcBox=t.owner!=='customer'||t.fc;
+  return `<div class="titem ${o?'open':''}" id="t-${t.id}">
+  <div class="task ${d?'done':''} ${isN?'next':''}" onclick="toggleMore('${t.id}')" aria-expanded="${o}">
     <div class="check" role="checkbox" aria-checked="${d}" onclick="event.stopPropagation();toggleTask('${t.id}',this)">${d?svg('check','#06301A',14,3):''}</div>
     <div>${isN?'<div class="nextlbl">Next maneuver</div>':''}<div class="ttl">${t.title}</div>
       <div class="meta">${ownChip(t.owner)} ${h?'<span class="own help"><span class="d"></span>Mission Control assisting</span>':''}<span>ETA ${t.est}</span>${t.trainings.length?`<span>· ${t.trainings.length} flight training${t.trainings.length>1?'s':''}</span>`:''}</div>
-      ${t.flag&&!d?`<div class="flag">${svg('alert','#FF8C9A',14)}<span>${t.flag}</span></div>`:''}
+      ${t.flag&&!d?`<div class="flag">${svg('alert','#B4233B',14)}<span>${t.flag}</span></div>`:''}
+      <span class="more"><span class="lbl"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></span>
     </div>
     <div class="right-meta">${t.role||''}${t.fc?`<br><em>FC: ${t.fc}</em>`:''}</div>
-  </div>`;
-}
-function careerView(p){
-  const n=p.missions.length,W=640,gap=112,H=n*gap+50,done=S.m[p.id];
-  const xs=[170,470,320,170,470];
-  const pts=p.missions.map((_,i)=>({x:i===n-1?320:xs[i%5],y:70+i*gap}));
-  let d=`M ${pts[0].x} ${pts[0].y}`;
-  for(let i=1;i<n;i++){const a=pts[i-1],b=pts[i];d+=` C ${a.x} ${a.y+gap*.6}, ${b.x} ${b.y-gap*.6}, ${b.x} ${b.y}`;}
-  const frac=done===0?0:Math.min(1,done/(n-1));
-  const bands={0:'BASIC ORBIT',5:'INTERMEDIATE ORBIT',10:'FINAL FRONTIER'};
-  const nodes=p.missions.map((m,i)=>{
-    const st=i<done?'done':i===done?'current':'locked',fin=i===n-1,pt=pts[i],R=fin?40:30;
-    const fill=st==='done'?'#2BB673':st==='current'?'#E07300':'#2A3158';
-    const icon=st==='done'?ICON.check:st==='locked'?ICON.lock:fin?ICON.flag:ICON.rocket;
-    const band=bands[i]!==undefined?`<text class="band" x="${pt.x<320?W-24:24}" y="${pt.y-30}" text-anchor="${pt.x<320?'end':'start'}" fill="${p.c}">${bands[i]}</text>`:'';
-    const stoneMark=i===4?`<g transform="translate(${pt.x+(pt.x<320?44:-80)},${pt.y-18})" opacity="${done>=5?1:.35}">${rockSVG(36).replace('<svg','<svg x="0" y="0"')}</g>`:'';
-    return `${band}${stoneMark}<g class="node ${st}" onclick="openMission('${p.id}',${i})">
-      ${st==='current'?`<circle class="halo" cx="${pt.x}" cy="${pt.y}" r="${R}" fill="#E07300" opacity=".5"/>`:''}
-      <g class="disc"><circle cx="${pt.x}" cy="${pt.y}" r="${R}" fill="${fill}" stroke="${st==='locked'?'#3A4270':'#fff'}" stroke-width="4"/>
-      <svg x="${pt.x-12}" y="${pt.y-12}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${st==='locked'?'#7C86B5':'#fff'}" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">${icon}</svg></g>
-      <text x="${pt.x}" y="${pt.y+R+20}" text-anchor="middle" font-size="14" font-weight="700" fill="${st==='locked'?'#7C86B5':'#EEF2FF'}">${m}</text>
-      <text x="${pt.x}" y="${pt.y+R+37}" text-anchor="middle" font-size="12" fill="#9AA6C8">${fin?`+${XP.conquer} XP · reveal the stone`:`Mission ${pad(i+1)} · +${XP.mission} XP`}</text></g>`}).join('');
-  const st=stoneState(p);
-  const stoneTxt=st==='gem'?`<b>${p.gem}</b>${p.lore}`:st==='rock'?`<b>Unidentified stone</b>Complete the Intermediate orbit and Conquer the Territory to discover what it really is.`:`<b>No stone yet</b>Complete the ${p.basic.length} Basic missions to find this planet's Special Stone.`;
-  return `<div class="layout"><div class="trail-wrap">
-    <svg viewBox="0 0 ${W} ${H}"><path class="trail-bg" d="${d}"/><path class="trail-done" id="trailDone" d="${d}" stroke="${p.c}" data-frac="${frac}"/><path class="trail-dash" d="${d}"/>${nodes}</svg></div>
-    <div class="side light">
-      <div class="card"><h3>${svg('orbit','#FFB061',16)} Terraforming</h3><div class="terra" style="--c:${p.c}">${planet(p,170,missionPct(p))}<div class="pct">${missionPct(p)}%</div><small>${done} of ${n} missions</small></div></div>
-      <div class="card"><h3>Special Stone</h3><div class="stonebox">${stoneIcon(p,64)}<div class="txt">${stoneTxt}</div></div></div>
-    </div></div>`;
-}
-
-/* ================= DRAWER ================= */
-function openTask(id){
-  const {p,t}=findTask(id),a=allTasks(p),i=a.findIndex(x=>x.id===id),nexts=a.slice(i+1,i+3),d=S.done.has(id),h=S.help.has(id);
-  const custBox=t.owner!=='fc',fcBox=t.owner!=='customer'||t.fc;
-  const D=document.getElementById('drawer');D.style.setProperty('--c',p.c);
-  D.innerHTML=`<div class="dh"><button class="x" onclick="closeDrawer()" aria-label="Close">×</button>
-    <small>${p.name} · Launch task</small><h2>${t.title}</h2>
-    <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">${ownChip(t.owner)} ${d?'<span class="own done"><span class="d"></span>Complete</span>':''} ${h&&!d?'<span class="own help"><span class="d"></span>Mission Control assisting</span>':''} <span class="own eta">ETA ${t.est}</span></div></div>
-  <div class="db">
+  </div>
+  <div class="task-more"><div><div class="tm">
     ${t.desc?`<p class="lead">${t.desc}</p>`:''}
-    ${t.flag?`<div class="flag" style="font-size:13px;padding:10px 12px">${svg('alert','#FF8C9A',16)}<span><b>Heads up:</b> ${t.flag}</span></div>`:''}
     <h5>Who flies this task</h5>
     <div class="resp">
       <div class="box c ${custBox?'':'muted'}">Your crew<b>${t.role||'—'}</b>${t.owner==='customer'?'<div style="margin-top:4px">You own this task</div>':''}</div>
       <div class="box f ${fcBox?'':'muted'}">FC Mission Control<b>${t.fc||'FC Support (if needed)'}</b>${t.owner==='fc'?'<div style="margin-top:4px">FC owns this task</div>':''}</div>
     </div>
     <h5>Flight training</h5>
-    ${t.trainings.length?t.trainings.map((x,k)=>{const key=id+'-'+k,s=S.seen.has(key);return `<div class="train ${s?'seen':''}"><div class="ty ${x.type}">${{video:'▶',article:'DOC',live:'LIVE',quiz:'QUIZ',scorm:'SCORM'}[x.type]}</div><div class="tt"><b>${x.title}</b>${x.type==='scorm'?'SCORM course':x.type[0].toUpperCase()+x.type.slice(1)} · ${x.dur}</div><button class="btn ghost" onclick="seeTraining('${key}','${id}')">${s?'✓ Done':x.type==='live'?'Register':'Start'}</button></div>`}).join(''):'<div style="color:var(--muted);font-size:13px">No training required for this maneuver.</div>'}
-    ${nexts.length?`<h5>Next maneuvers</h5><div class="nexts">${nexts.map(n=>`<div class="n" onclick="openTask('${n.id}')">${S.done.has(n.id)?svg('check','#3DDC84',18,3):'<span class="ring0"></span>'}<div style="flex:1"><b>${n.title}</b></div>${ownChip(n.owner)}</div>`).join('')}</div>`:''}
-  </div>
-  <div class="df">
-    <button class="btn ${d?'ghost':''}" onclick="toggleTask('${id}')">${d?'Mark as not done':`Complete · +${XP.task} XP`}</button>
-    ${d?'':`<button class="btn blue" onclick="askHelp('${id}')" ${h?'disabled':''}>${h?'Mission Control notified':'Call Mission Control'}</button>`}
+    ${t.trainings.length?t.trainings.map((x,k)=>{const key=t.id+'-'+k,s=S.seen.has(key);return `<div class="train ${s?'seen':''}"><div class="ty ${x.type}">${{video:'▶',article:'DOC',live:'LIVE',quiz:'QUIZ',scorm:'SCORM'}[x.type]}</div><div class="tt"><b>${x.title}</b>${x.type==='scorm'?'SCORM course':x.type[0].toUpperCase()+x.type.slice(1)} · ${x.dur}</div><button class="btn ghost sm" onclick="seeTraining('${key}','${t.id}')">${s?'✓ Done':x.type==='live'?'Register':'Start'}</button></div>`}).join(''):'<div style="color:var(--muted);font-size:13px">No training required for this maneuver.</div>'}
+    <div class="tm-act">
+      <button class="btn sm ${d?'ghost':''}" onclick="toggleTask('${t.id}')">${d?'Mark as not done':`Complete · +${XP.task} XP`}</button>
+      ${d?'':`<button class="btn blue sm" onclick="askHelp('${t.id}')" ${h?'disabled':''}>${h?'Mission Control notified':'Call Mission Control'}</button>`}
+    </div>
+  </div></div></div>
   </div>`;
-  showDrawer();
+}
+function toggleMore(id){const el=document.getElementById('t-'+id);if(!el)return;if(S.open.has(id)){S.open.delete(id);el.classList.remove('open')}else{S.open.add(id);el.classList.add('open')}el.querySelector('.task').setAttribute('aria-expanded',S.open.has(id))}
+const MT=[15,20,20,25,25,25,30,30,35,40,60];
+function careerView(p){
+  const n=p.missions.length,done=S.m[p.id],cols=[0,1,2,1,0,1,2,1,0,1,1],X=[28,50,72];
+  const bands={0:'Basic orbit',5:'Intermediate orbit',10:'Final frontier'};
+  const rows=p.missions.map((m,i)=>{
+    const st=i<done?'done':i===done?'current':'locked',fin=i===n-1,c=cols[i];
+    const icon=st==='done'?'check':st==='locked'?'lock':fin?'flag':'rocket';
+    const lvl=i<5?'Basic orbit':i<10?'Intermediate orbit':'Final frontier';
+    const btn=st==='locked'?`<button class="btn sm ghost" disabled>${svg('lock','currentColor',14)} Locked</button>`:st==='done'?`<button class="btn sm ghost" onclick="openPlayer('${p.id}',${i})">Review course</button>`:`<button class="btn sm" onclick="openPlayer('${p.id}',${i})">${fin?'Start final mission':'Start course'} ▸</button>`;
+    let conn='';
+    if(i<n-1){const a=X[c],b=X[cols[i+1]],dn=i<done;
+      conn=`<svg class="conn" viewBox="0 0 100 46" preserveAspectRatio="none" aria-hidden="true"><path class="cbg" d="M${a} 0 C${a} 26,${b} 20,${b} 46"/>${dn?`<path class="cdn" style="stroke:${p.c}" d="M${a} 0 C${a} 26,${b} 20,${b} 46"/>`:''}<path class="cdash" d="M${a} 0 C${a} 26,${b} 20,${b} 46"/></svg>
+      <svg class="conn-m" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path class="cbg" d="M50 0 V30"/>${dn?`<path class="cdn" style="stroke:${p.c}" d="M50 0 V30"/>`:''}</svg>`;}
+    return `<div class="mrow c${c}" id="m-${i}">
+      ${bands[i]?`<div class="mband" style="color:${shade(p.c,.7)}">${bands[i]}</div>`:''}
+      <div class="mcard ${st} ${fin?'final':''}">
+        <div class="mico">${svg(icon,st==='locked'?'#8A93B0':'#fff',22,2.3)}</div>
+        <div class="mbody">
+          <div class="mk">${fin?'Final mission':'Mission '+pad(i+1)} · ${lvl}</div>
+          <h4>${m}</h4>
+          <div class="mmeta"><span>⏱ ${MT[i]} min</span><span>${fin?'Hands-on project':'3 units'}</span><span>SCORM</span><span>+${fin?XP.conquer:XP.mission} XP</span>${st==='done'?'<span class="ok">✓ Completed</span>':''}</div>
+          <div class="mact">${btn}</div>
+        </div>
+      </div>
+      ${i===4?`<div class="mstone ${done>=5?'got':''}">${rockSVG(26)}<span>${done>=5?'Special Stone found':'Special Stone checkpoint — finish the Basic orbit'}</span></div>`:''}
+    </div>${conn}`;}).join('');
+  const st=stoneState(p);
+  const stoneTxt=st==='gem'?`<b>${p.gem}</b>${p.lore}`:st==='rock'?`<b>Unidentified stone</b>Complete the Intermediate orbit and Conquer the Territory to discover what it really is.`:`<b>No stone yet</b>Complete the ${p.basic.length} Basic missions to find this planet's Special Stone.`;
+  return `<div class="layout"><div class="trail-wrap light mpath" style="--c:${p.c}">${rows}</div>
+    <div class="side light">
+      <div class="card"><h3>${svg('orbit','#FFB061',16)} Terraforming</h3><div class="terra" style="--c:${p.c}">${planet(p,170,missionPct(p))}<div class="pct">${missionPct(p)}%</div><small>${done} of ${n} missions</small></div></div>
+      <div class="card"><h3>Special Stone</h3><div class="stonebox">${stoneIcon(p,64)}<div class="txt">${stoneTxt}</div></div></div>
+    </div></div>`;
+}
+function openPlayer(pid,i){
+  const p=P(pid),m=p.missions[i],fin=i===p.missions.length-1,cur=i===S.m[pid];
+  const units=fin?['Briefing','Real-world challenge','Final assessment']:['Lesson','Practice','Knowledge check'];
+  modal(p.c,`<div class="player">
+    <div class="ph"><span>SCORM course player</span><button class="x" onclick="closeModal()" aria-label="Close">×</button></div>
+    <div class="screen" style="--c:${p.c}"><div>${svg('rocket','#fff',34)}<b>${m}</b><small>Your SCORM package loads here</small></div></div>
+    <div class="units">${units.map((u,k)=>`<span class="${k===0?'on':''}">${k+1}. ${u}</span>`).join('')}</div>
+    <p style="margin:12px 0 0;font-size:12px;color:var(--muted)">Completion is reported automatically by the SCORM course.</p>
+    ${cur?`<button class="demo" onclick="closeModal();completeMission('${pid}')">Demo only: simulate SCORM completion</button>`:''}
+  </div>`);
+}
+function openTask(id,scroll){
+  const {p}=findTask(id);S.open.add(id);
+  if(S.view!=='path'||S.pid!==p.id||S.tab!=='setup'){S.view='path';S.pid=p.id;S.tab='setup';render();scroll=true}
+  else{const el=document.getElementById('t-'+id);if(el)el.classList.add('open')}
+  if(scroll)setTimeout(()=>{const el=document.getElementById('t-'+id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600)}},120);
 }
 function openMission(pid,i){
-  const p=P(pid),done=S.m[pid],st=i<done?'done':i===done?'current':'locked',fin=i===p.missions.length-1,m=p.missions[i];
-  const lvl=i<5?'Basic orbit':i<10?'Intermediate orbit':'Final frontier';
-  const units=fin?[['Real-world challenge in your sandbox','live','45 min'],['Peer review checklist','article','10 min'],['Final assessment','quiz','15 Q']]:[['Watch: '+m,'video','8 min'],['Interactive lesson','scorm','12 min'],['Knowledge check','quiz','5 Q']];
-  const D=document.getElementById('drawer');D.style.setProperty('--c',st==='locked'?'#3A4270':p.c);
-  D.innerHTML=`<div class="dh"><button class="x" onclick="closeDrawer()" aria-label="Close">×</button>
-    <small>${p.name} · ${lvl}${fin?'':' · Mission '+pad(i+1)}</small><h2>${m}</h2>
-    <div style="margin-top:10px">${st==='done'?'<span class="own done"><span class="d"></span>Complete</span>':st==='locked'?'<span class="own eta">Locked — finish the previous mission</span>':'<span class="own customer"><span class="d"></span>Ready for launch</span>'}</div></div>
-  <div class="db">
-    <p class="lead">${fin?`Prove mastery of ${p.name} with a real scenario. Succeed and the stone you found reveals its true form.`:`Short, practical units. Complete all three to earn +${XP.mission} XP and terraform more of the planet.`}</p>
-    ${i===4&&st!=='done'?`<div class="flag stone-note">Finishing this mission completes the Basic orbit — you will find this planet's Special Stone.</div>`:''}
-    <h5>Units</h5>
-    ${units.map(u=>`<div class="train ${st==='done'?'seen':''}"><div class="ty ${u[1]}">${{video:'▶',article:'DOC',live:'LAB',quiz:'QUIZ',scorm:'SCORM'}[u[1]]}</div><div class="tt"><b>${u[0]}</b>${u[2]}</div></div>`).join('')}
-    <h5>Mission Control</h5>
-    <div style="font-size:13px;color:var(--muted)"><b style="color:var(--ink)">Customer Success Manager</b> — book a 1:1 coaching session if you get stuck.</div>
-  </div>
-  <div class="df"><button class="btn" ${st!=='current'?'disabled':''} onclick="completeMission('${pid}')">${st==='done'?'Complete':fin?`Conquer the Territory · +${XP.conquer} XP`:`Complete mission · +${XP.mission} XP`}</button></div>`;
-  showDrawer();
+  S.view='path';S.pid=pid;S.tab='career';render();
+  setTimeout(()=>{const el=document.getElementById('m-'+i);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600)}},120);
 }
+
+/* ================= DRAWER (unused) ================= */
 function showDrawer(){document.getElementById('drawer').classList.add('on');document.getElementById('scrim').classList.add('on')}
 function closeDrawer(){document.getElementById('drawer').classList.remove('on');document.getElementById('scrim').classList.remove('on')}
 
@@ -768,10 +920,12 @@ function loopC(){cx.clearRect(0,0,cv.width,cv.height);parts=parts.filter(p=>p.li
 function burst(el){if(!el)return confetti(40);const b=el.getBoundingClientRect();confetti(34,b.left+b.width/2,b.top+b.height/2)}
 
 /* starfield */
-const sc=document.getElementById('stars'),sx=sc.getContext('2d');let stars=[],shoot=null;
-function fitS(){sc.width=innerWidth*devicePixelRatio;sc.height=innerHeight*devicePixelRatio;stars=Array.from({length:Math.round(innerWidth*innerHeight/5000)},()=>({x:Math.random()*sc.width,y:Math.random()*sc.height,r:(Math.random()*.9+.25)*devicePixelRatio,p:Math.random()*6.3,v:Math.random()*.02+.005}))}
+const sc=document.getElementById('stars'),sx=sc.getContext('2d');sc.style.display='none';let stars=[],shoot=null;
+function fitS(){sc.width=innerWidth*devicePixelRatio;sc.height=innerHeight*devicePixelRatio;stars=Array.from({length:Math.round(innerWidth*innerHeight/5000)},()=>({x:Math.random()*sc.width,y:Math.random()*sc.height,r:(Math.random()*1+.3)*devicePixelRatio,p:Math.random()*6.3,v:Math.random()*.045+.012,b:Math.random()<.12}))}
 addEventListener('resize',fitS);fitS();
-(function drawS(){sx.clearRect(0,0,sc.width,sc.height);stars.forEach(s=>{s.p+=s.v;sx.globalAlpha=.35+.65*Math.abs(Math.sin(s.p));sx.fillStyle='#fff';sx.beginPath();sx.arc(s.x,s.y,s.r,0,7);sx.fill()});
+function skyFade(){const max=Math.max(1,document.documentElement.scrollHeight-innerHeight),t=Math.min(1,scrollY/max);sc.style.opacity=(1-t*.6).toFixed(2);document.querySelector('.nebula').style.opacity=(1-t*.5).toFixed(2)}
+addEventListener('scroll',skyFade,{passive:true});
+(function drawS(){if(sc.style.display==='none')return;sx.clearRect(0,0,sc.width,sc.height);sx.fillStyle='#fff';sx.strokeStyle='#fff';stars.forEach(s=>{s.p+=s.v;const k=Math.pow(Math.abs(Math.sin(s.p)),2);sx.globalAlpha=.12+.88*k;sx.beginPath();sx.arc(s.x,s.y,s.r*(s.b?1.3:1),0,7);sx.fill();if(s.b&&k>.55){const L=s.r*(3+7*k);sx.globalAlpha=k*.8;sx.lineWidth=Math.max(1,s.r*.45);sx.beginPath();sx.moveTo(s.x-L,s.y);sx.lineTo(s.x+L,s.y);sx.moveTo(s.x,s.y-L);sx.lineTo(s.x,s.y+L);sx.stroke()}});
   if(!shoot&&Math.random()<.004)shoot={x:Math.random()*sc.width*.7,y:Math.random()*sc.height*.4,l:0};
   if(shoot){shoot.l+=14*devicePixelRatio;const g=sx.createLinearGradient(shoot.x+shoot.l,shoot.y+shoot.l*.4,shoot.x+shoot.l-120,shoot.y+shoot.l*.4-48);g.addColorStop(0,'rgba(255,255,255,.9)');g.addColorStop(1,'rgba(255,255,255,0)');sx.globalAlpha=1;sx.strokeStyle=g;sx.lineWidth=2;sx.beginPath();sx.moveTo(shoot.x+shoot.l,shoot.y+shoot.l*.4);sx.lineTo(shoot.x+shoot.l-120,shoot.y+shoot.l*.4-48);sx.stroke();if(shoot.l>sc.width*.5)shoot=null}
   requestAnimationFrame(drawS)})();
@@ -802,14 +956,14 @@ function animateIn(){
 
 /* ================= ROUTING / SEARCH ================= */
 function go(v,pid){S.view=v;if(pid){S.pid=pid;S.tab='setup'}closeDrawer();render();scrollTo({top:0,behavior:'smooth'})}
-function render(){document.getElementById('app').innerHTML=S.view==='home'?home():path();document.getElementById('xpTop').textContent=S.xp.toLocaleString();animateIn()}
+function render(){document.getElementById('app').innerHTML=S.view==='home'?home():path();setTimeout(skyFade,0);document.getElementById('xpTop').textContent=S.xp.toLocaleString();animateIn()}
 const esc=s=>s.replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c]));
 function search(q){
   q=q.trim().toLowerCase();if(!q){render();return}
   const hits=[];PRODUCTS.forEach(p=>{if(p.name.toLowerCase().includes(q))hits.push({k:'Planet',l:p.name,a:`go('path','${p.id}')`});
-    allTasks(p).forEach(t=>{if((t.title+' '+t.trainings.map(x=>x.title).join(' ')).toLowerCase().includes(q))hits.push({k:p.name+' · Launch',l:t.title,a:`go('path','${p.id}');openTask('${t.id}')`})});
-    p.missions.forEach((m,i)=>{if(m.toLowerCase().includes(q))hits.push({k:p.name+' · Mission',l:m,a:`S.pid='${p.id}';S.view='path';S.tab='career';render();openMission('${p.id}',${i})`})})});
-  document.getElementById('app').innerHTML=`<div class="section-h"><div><h2>Scan results for “${esc(q)}”</h2><p>${hits.length} found</p></div></div><div class="card">${hits.length?hits.map(h=>`<div class="kv" style="cursor:pointer;padding:11px 0" onclick="${h.a}"><b>${esc(h.l)}</b><span style="color:var(--muted)">${esc(h.k)}</span></div>`).join(''):'Nothing in this sector.'}</div>`;
+    allTasks(p).forEach(t=>{if((t.title+' '+t.trainings.map(x=>x.title).join(' ')).toLowerCase().includes(q))hits.push({k:p.name+' · Launch',l:t.title,a:`openTask('${t.id}',true)`})});
+    p.missions.forEach((m,i)=>{if(m.toLowerCase().includes(q))hits.push({k:p.name+' · Mission',l:m,a:`openMission('${p.id}',${i})`})})});
+  document.getElementById('app').innerHTML=`<div class="section-h"><div><h2>Scan results for “${esc(q)}”</h2><p>${hits.length} found</p></div></div><div class="card light">${hits.length?hits.map(h=>`<div class="kv" style="cursor:pointer;padding:11px 0" onclick="${h.a}"><b>${esc(h.l)}</b><span style="color:var(--muted)">${esc(h.k)}</span></div>`).join(''):'Nothing in this sector.'}</div>`;
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDrawer();closeModal()}});
 render();
